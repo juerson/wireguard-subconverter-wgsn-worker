@@ -4314,7 +4314,9 @@ var Wireguard = class extends SnBase {
 var worker_default = {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    let password = env.PASSWORD || "";
     let target = url.searchParams.get("target") || "";
+    let pwd = url.searchParams.get("pwd") || "";
     let cidrsValue = url.searchParams.get("cidrs") || "";
     let newcidrs = cidrsValue ? cidrsValue.trim().split(",") : cidrs;
     let nodeSize = url.searchParams.get("nodeSize") || randomNodeSize;
@@ -4328,6 +4330,10 @@ var worker_default = {
     }
     MTU = url.searchParams.get("mtu") || MTU;
     let mtu = isNaN(Number(MTU)) ? 1280 : Number(MTU);
+    if (pwd) {
+      password = encodeURIComponent(password);
+      pwd = encodeURIComponent(pwd);
+    }
     let ips_with_ports = [];
     generateRandomIPv4InRange(newcidrs, ipSize).forEach((ip) => {
       getRandomElementsFromArray(ports, portSize).forEach((port) => {
@@ -4336,7 +4342,7 @@ var worker_default = {
     });
     switch (url.pathname) {
       case "/sub":
-        if (target.toLocaleLowerCase() === "wgsn") {
+        if (target.toLocaleLowerCase() === "wgsn" && password === pwd) {
           let endpoints = getRandomElementsFromArray(ips_with_ports, nodeSize);
           let snLinkResult = [];
           endpoints.forEach((ip_with_port) => {

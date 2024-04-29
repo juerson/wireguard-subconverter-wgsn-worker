@@ -2,3 +2,6 @@ name = "worker-broad-waterfall-8ac4"
 main = "src/worker.js"
 compatibility_date = "2024-04-28"
 workers_dev = true
+
+[vars]
+PASSWORD = "" # 访问密码

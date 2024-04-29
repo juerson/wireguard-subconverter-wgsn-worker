@@ -163,8 +163,10 @@ class Wireguard extends SnBase {
 export default {
 	async fetch(request, env, ctx) {
 		const url = new URL(request.url);
+		let password = env.PASSWORD || ""; // 从cloudflare后台的环境变量中获取密码
 		//———————————————————————————————————————— 从 URL 请求链接中获取需要的参数 ————————————————————————————————————————
 		let target = url.searchParams.get('target') || ""; // 转换为目标客户端或链接类型，v2rayn/wireguard、nekobox/nekoray
+		let pwd = url.searchParams.get('pwd') || ""; // 从链接中获取密码
 		let cidrsValue = url.searchParams.get('cidrs') || "";
 		let newcidrs = cidrsValue ? cidrsValue.trim().split(',') : cidrs;
 		let nodeSize = url.searchParams.get('nodeSize') || randomNodeSize;
@@ -180,7 +182,13 @@ export default {
 
 		MTU = url.searchParams.get('mtu') || MTU; // 修改MTU值
 		let mtu = isNaN(Number(MTU)) ? 1280 : Number(MTU);
-
+		
+		// 将除了字母、数字、下划线、连字符和点号之外的所有字符进行编码
+		if (pwd) {
+			password = encodeURIComponent(password);
+			pwd = encodeURIComponent(pwd);
+		}
+		
 		// ———————————————————————————— 获取多个 ip_with_port 并添加到 ips_with_ports 数组中 ————————————————————————————
 
 		// 收集IP:PORT
@@ -196,7 +204,7 @@ export default {
 		switch (url.pathname) {
 			case '/sub':
 				// 符合转换目标的才会进行转换
-				if (target.toLocaleLowerCase() === "wgsn") {
+				if (target.toLocaleLowerCase() === "wgsn" && password === pwd) {
 					let endpoints = getRandomElementsFromArray(ips_with_ports, nodeSize);
 					let snLinkResult = [];
 					endpoints.forEach(ip_with_port => {

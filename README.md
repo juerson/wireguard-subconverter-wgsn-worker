@@ -12,7 +12,7 @@
 
 ### 二、搭建教程
 
-建议将 `_worker.js`中第**4183**行代码中的 `wireguardParameters` 参数改为自己的 `wireguard` 配置的参数（也可以搜索 `src/worker.js` 快速定位），然后按照下面不同方式，部署到 `Cloudflare` 中。
+建议将 `_worker.js`中第**4183**行代码中的 `wireguardParameters` 参数改为自己的 `wireguard` 配置的参数（也可以在 `_worker.js` 代码中搜索 `worker.js` 快速定位），然后按照下面不同方式，部署到 `Cloudflare` 中。
 
 - Cloudflare Workers
 
@@ -21,6 +21,19 @@
 - Cloudflare Pages
 
 将`_worker.js`的代码下载到本地电脑，文件名称要一样，不能修改，然后在文件外面套一层文件夹，也就是将 `_worker.js` 下载到一个空文件夹中，然后使用 git 工具，在这个文件夹的目录中执行 `git init` 命令，最后将这个文件夹以zip格式压缩，或者直接以文件夹的形式上传到 `Cloudflare Pages` 中，完成部署。
+
+#### （可选）添加访问的密码
+
+防止别人知道你的网站地址，使用您的 `Cloudflare WARP` 账号的流量，可以选择性添加订阅链接的访问密码。worker 和 pages 设置变量 `PASSWORD` 的方法，分别是：
+
+<img src="images\图2.png" />
+
+<img src="images\图3.png" />
+
+如果设置了访问密码，在订阅链接中没有传入或传入的`pwd` 值与  `PASSWORD` 值不相同时，无法获取订阅地址的订阅内容。
+```
+https://a.abc.workers.dev/sub?target=wgsn&pwd=<这里添加你设置的变量密码>
+```
 
 ### 三、参数说明
 
