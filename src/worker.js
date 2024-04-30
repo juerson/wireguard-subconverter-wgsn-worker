@@ -37,7 +37,7 @@ let ports = [854, 859, 864, 878, 880, 890, 891, 894, 903, 908, 928, 934, 939, 94
 // 它们控制生成 SN Link 的数量
 let randomIpSize = 1000; // 在cidrs中，海选出1000个IP地址(指从cidrs中获取的总IP数，不是每个cidr获取randomIpSize个IP；获取IP没有重复的，randomIpSize指不重复的IP数)，超出cidrs的总IP数，就生成cidrs范围中所有IP地址
 let randomPortSize = 10; // 在ports中，海选出10个端口，该值输入不合法(共54个端口)，则默认为10个随机端口；注意：该值太大，会很大几率生成同一个IP对应不同的端口
-let randomNodeSize = 300; // 从前面海选得到的IP和PORT后，将它们组合成一个ip_with_port的数组，从该数组中，随机挑300个ip_with_port数据，这个数据应用到生成 SN Link 分享链接
+let randomNodeSize = 200; // 从前面海选得到的IP和PORT后，将它们组合成一个ip_with_port的数组，从该数组中，随机挑200个ip_with_port数据，这个数据应用到生成 SN Link 分享链接
 
 // ————————————————————————————————————————— SN Link 的 wireguard 序列化 ———————————————————————————————————————————————————
 

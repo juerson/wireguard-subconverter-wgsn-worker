@@ -51,7 +51,7 @@ https://a.abc.workers.dev/sub?target=wgsn&ipSize=200&portSize=10&cidrs=162.159.1
 | 参数         | 含义                                                         | 例子                                                         |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | target       | （必须）转换成的目标，这个代码只能转换为Nekobox for Android 的 `sn://` 。 | target=wgsn，wireguard => wg+sn => wgsn，特指 Nekobox for Android 中 wireguard 代理协议的 sn 分享链接 |
-| nodeSize     | （可选）您需要多少条sn://链接?                               | nodeSize=100，100条 `SN Link` 链接，默认为300                |
+| nodeSize     | （可选）您需要多少条sn://链接?                               | nodeSize=100，100条 `SN Link` 链接，默认为200                |
 | loc/location | （可选）你想要哪个 cidr 段的IP？us => 162.159开头的IP；gb => 188.114开头的IP。 | loc=us、loc=gb                                               |
 | mtu          | （可选）修改 WirGuard 中的 mtu 的值。                        | mtu=1280，或者 `1280~1500` 之间的数，默认1280                |
 | ipSize       | （可选）从所有 cidrs 中随机生成多少个不重复的IP，一定程度上可以控制 SN Link 生成的数量。 | ipSize=500，生成500个IP地址，默认为1000                      |
