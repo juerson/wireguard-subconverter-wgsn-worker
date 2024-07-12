@@ -2,27 +2,27 @@ import pako from 'pako'; //  JavaScript 压缩和解压库
 
 // 这里是普通账号，使用时，建议更换成自己的plus账号
 let wireguardParameters = [
-  { 'privateKey': 'AKs7CKzbDVmfjSgCB4A1JNI5YBMclHYV2OQ7srIijW4=', 'ipv6': '2606:4700:110:876d:4d3c:4206:c90c:6bd0/128', 'reserved': "tBDy" },
-  { 'privateKey': 'ILJiqBa4QguF5YHRiB9Xfq2Ll01qbYe4dUKZLdgNTFs=', 'ipv6': '2606:4700:110:8e7b:3658:cd12:5c4f:d86e/128', 'reserved': "2rSJ" },
-  { 'privateKey': 'aJ2wqfkki3um7JnNAH2R6/OnAo2Td+pmxbRReh1v9GE=', 'ipv6': '2606:4700:110:8310:d937:2fb:c312:9498/128', 'reserved': "omje" },
-  { 'privateKey': '0EefAfoz3eY1PUwycUO5/Ux0GKnjOq6TJk5NySdOglk=', 'ipv6': '2606:4700:110:8b5b:874a:4dbe:b6d2:d333/128', 'reserved': "udAY" },
-  { 'privateKey': 'gNPBZNJg1mOGJjoTTof9luaQHdZP2oMRU8nXd3xjpX8=', 'ipv6': '2606:4700:110:83b7:3a13:7ef3:96fc:f055/128', 'reserved': "" },
-  { 'privateKey': 'sIVbx/54EJOM0caRr/kksFAkdni+V9VZawSZaha0tms=', 'ipv6': '2606:4700:110:8502:e803:c14e:2858:c0e7/128', 'reserved': "" },
-  { 'privateKey': '+Cgu25E1zo9PkW5fC299zgbGVGKJamWgF6/iqQdoUW0=', 'ipv6': '2606:4700:110:805e:1441:a533:975b:8a39/128', 'reserved': "mbeS" },
-  { 'privateKey': 'GKaNRx+KVRL3F1sguZHO8wh70yUprNsPjmUapCGUsGk=', 'ipv6': '2606:4700:110:88f9:54b8:120e:d01d:c77e/128', 'reserved': "eWZI" },
-  { 'privateKey': 'qEqlXOEDcFt803y8Gs/fo8DuZJpZpWV/FSh1oKReFXI=', 'ipv6': '2606:4700:110:890f:f926:98fe:7e61:d0e7/128', 'reserved': "Eg/7" },
-  { 'privateKey': '+HfkMSyh7obEkX4J8Qa7Xk77CLVn45AW4CdBbnFNaGc=', 'ipv6': '2606:4700:110:83e8:84f7:8c64:70b4:6709/128', 'reserved': "XPKM" },
-  { 'privateKey': 'cA8htoCSuLJbax8I6HewsDTwTbuWt5DjEItcGvLGREw=', 'ipv6': '2606:4700:110:8c0b:359c:ee61:a221:d261/128', 'reserved': "Mg/q" },
-  { 'privateKey': 'iLHohl4txwAsgUPW1lGsnAeJDFvit6LAdMYTwbNRGUM=', 'ipv6': '2606:4700:110:81a6:2bc6:e542:7f3e:57f1/128', 'reserved': "Bhob" },
-  { 'privateKey': 'eMkBv99f6rbTboaKNV4HJhvu/Dn35mub7BrY8xFrCVo=', 'ipv6': '2606:4700:110:8980:cd13:9729:f969:9aab/128', 'reserved': "ia3l" },
-  { 'privateKey': '8NquX1vPe6AHY5qXmShDELMtx4was2awcNqKj2MgRGM=', 'ipv6': '2606:4700:110:82e8:22b6:a7ee:b89c:a5a2/128', 'reserved': "7Lqd" },
-  { 'privateKey': 'kK/MhN/pbNI05H77pgSsNN6OqM+jPba3Lz9A5Jlg8lw=', 'ipv6': '2606:4700:110:8847:e19b:4828:fe35:d337/128', 'reserved': "i6sj" },
-  { 'privateKey': '6L1n+NV62WEr2o4/pEUopsgB6RzcY86BLIgYwdOTxmc=', 'ipv6': '2606:4700:110:833b:f16c:a4f3:cf60:8fa3/128', 'reserved': "jdXG" },
-  { 'privateKey': 'sALjsE4FBGPC/GosnaOhFy/+2cog7roA3jN8yC75F3g=', 'ipv6': '2606:4700:110:8d06:7ef8:cf45:2393:9ac7/128', 'reserved': "QpBX" },
-  { 'privateKey': 'iEpioH7klluHVhhhDsz0JodBtjqECXMT7J0LLqHmsEs=', 'ipv6': '2606:4700:110:871a:f575:a463:76a0:1984/128', 'reserved': "QaoR" },
-  { 'privateKey': 'IIBhFRq9qkF0nxPXHzzvATyRVcEePvPU5bJOuoC2S0g=', 'ipv6': '2606:4700:110:8ea1:c997:fbfe:f888:3946/128', 'reserved': "Eow2" },
-  { 'privateKey': 'gO/NAt7kT3zNWk6OiQ5Ru9A2ksAr96sPxxr68B8TtH0=', 'ipv6': '2606:4700:110:8775:bf6c:a489:d6db:fd76/128', 'reserved': "Kkwg" },
-  { 'privateKey': 'iBtKwA/VDkj1n8uFD0v+E3bIQHMPWsRagclDwr6lUVI=', 'ipv6': '2606:4700:110:8dcd:e0e6:7c9a:c35e:2ece/128', 'reserved': "zicA" },
+	{ 'privateKey': 'AKs7CKzbDVmfjSgCB4A1JNI5YBMclHYV2OQ7srIijW4=', 'ipv6': '2606:4700:110:876d:4d3c:4206:c90c:6bd0/128', 'reserved': "tBDy" },
+	{ 'privateKey': 'ILJiqBa4QguF5YHRiB9Xfq2Ll01qbYe4dUKZLdgNTFs=', 'ipv6': '2606:4700:110:8e7b:3658:cd12:5c4f:d86e/128', 'reserved': "2rSJ" },
+	{ 'privateKey': 'aJ2wqfkki3um7JnNAH2R6/OnAo2Td+pmxbRReh1v9GE=', 'ipv6': '2606:4700:110:8310:d937:2fb:c312:9498/128', 'reserved': "omje" },
+	{ 'privateKey': '0EefAfoz3eY1PUwycUO5/Ux0GKnjOq6TJk5NySdOglk=', 'ipv6': '2606:4700:110:8b5b:874a:4dbe:b6d2:d333/128', 'reserved': "udAY" },
+	{ 'privateKey': 'gNPBZNJg1mOGJjoTTof9luaQHdZP2oMRU8nXd3xjpX8=', 'ipv6': '2606:4700:110:83b7:3a13:7ef3:96fc:f055/128', 'reserved': "" },
+	{ 'privateKey': 'sIVbx/54EJOM0caRr/kksFAkdni+V9VZawSZaha0tms=', 'ipv6': '2606:4700:110:8502:e803:c14e:2858:c0e7/128', 'reserved': "" },
+	{ 'privateKey': '+Cgu25E1zo9PkW5fC299zgbGVGKJamWgF6/iqQdoUW0=', 'ipv6': '2606:4700:110:805e:1441:a533:975b:8a39/128', 'reserved': "mbeS" },
+	{ 'privateKey': 'GKaNRx+KVRL3F1sguZHO8wh70yUprNsPjmUapCGUsGk=', 'ipv6': '2606:4700:110:88f9:54b8:120e:d01d:c77e/128', 'reserved': "eWZI" },
+	{ 'privateKey': 'qEqlXOEDcFt803y8Gs/fo8DuZJpZpWV/FSh1oKReFXI=', 'ipv6': '2606:4700:110:890f:f926:98fe:7e61:d0e7/128', 'reserved': "Eg/7" },
+	{ 'privateKey': '+HfkMSyh7obEkX4J8Qa7Xk77CLVn45AW4CdBbnFNaGc=', 'ipv6': '2606:4700:110:83e8:84f7:8c64:70b4:6709/128', 'reserved': "XPKM" },
+	{ 'privateKey': 'cA8htoCSuLJbax8I6HewsDTwTbuWt5DjEItcGvLGREw=', 'ipv6': '2606:4700:110:8c0b:359c:ee61:a221:d261/128', 'reserved': "Mg/q" },
+	{ 'privateKey': 'iLHohl4txwAsgUPW1lGsnAeJDFvit6LAdMYTwbNRGUM=', 'ipv6': '2606:4700:110:81a6:2bc6:e542:7f3e:57f1/128', 'reserved': "Bhob" },
+	{ 'privateKey': 'eMkBv99f6rbTboaKNV4HJhvu/Dn35mub7BrY8xFrCVo=', 'ipv6': '2606:4700:110:8980:cd13:9729:f969:9aab/128', 'reserved': "ia3l" },
+	{ 'privateKey': '8NquX1vPe6AHY5qXmShDELMtx4was2awcNqKj2MgRGM=', 'ipv6': '2606:4700:110:82e8:22b6:a7ee:b89c:a5a2/128', 'reserved': "7Lqd" },
+	{ 'privateKey': 'kK/MhN/pbNI05H77pgSsNN6OqM+jPba3Lz9A5Jlg8lw=', 'ipv6': '2606:4700:110:8847:e19b:4828:fe35:d337/128', 'reserved': "i6sj" },
+	{ 'privateKey': '6L1n+NV62WEr2o4/pEUopsgB6RzcY86BLIgYwdOTxmc=', 'ipv6': '2606:4700:110:833b:f16c:a4f3:cf60:8fa3/128', 'reserved': "jdXG" },
+	{ 'privateKey': 'sALjsE4FBGPC/GosnaOhFy/+2cog7roA3jN8yC75F3g=', 'ipv6': '2606:4700:110:8d06:7ef8:cf45:2393:9ac7/128', 'reserved': "QpBX" },
+	{ 'privateKey': 'iEpioH7klluHVhhhDsz0JodBtjqECXMT7J0LLqHmsEs=', 'ipv6': '2606:4700:110:871a:f575:a463:76a0:1984/128', 'reserved': "QaoR" },
+	{ 'privateKey': 'IIBhFRq9qkF0nxPXHzzvATyRVcEePvPU5bJOuoC2S0g=', 'ipv6': '2606:4700:110:8ea1:c997:fbfe:f888:3946/128', 'reserved': "Eow2" },
+	{ 'privateKey': 'gO/NAt7kT3zNWk6OiQ5Ru9A2ksAr96sPxxr68B8TtH0=', 'ipv6': '2606:4700:110:8775:bf6c:a489:d6db:fd76/128', 'reserved': "Kkwg" },
+	{ 'privateKey': 'iBtKwA/VDkj1n8uFD0v+E3bIQHMPWsRagclDwr6lUVI=', 'ipv6': '2606:4700:110:8dcd:e0e6:7c9a:c35e:2ece/128', 'reserved': "zicA" },
 ];
 
 let PrivateKey = "wBUDtqZGfV1gpV7n4GNsGEyR76hAMN1hGaM1yfYcFms=";
@@ -31,7 +31,11 @@ let PublicKey = "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=";
 let Reserved = "gUxW";
 let MTU = 1280;
 
-let cidrs = ['162.159.192.0/24', '162.159.193.0/24', '162.159.195.0/24', '188.114.96.0/24', '188.114.97.0/24', '188.114.98.0/24', '188.114.99.0/24'];
+const ipv4CidrRegex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\/(3[0-2]|[1-2]?[0-9])$/;
+const ipv6CidrRegex = /^((?:[0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,7}:|(?:[0-9A-Fa-f]{1,4}:){1,6}:[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}|(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}|(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}|(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}|[0-9A-Fa-f]{1,4}:(?:(?::[0-9A-Fa-f]{1,4}){1,6})|:(?:(?::[0-9A-Fa-f]{1,4}){1,7}|:)|fe80:(?::[0-9A-Fa-f]{0,4}){0,4}%[0-9A-Za-z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:[0-9A-Fa-f]{1,4}:){1,4}[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,4}:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])(?:\.(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])){3})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
+const selectedCIDRVersion = 4; // 默认选择是IPv4 CIDRs。如果值是4，就选择IPv4 CIDRs，如果值是6，则选择IPv6 CIDRs
+
+let cidrs = ['162.159.192.0/24', '162.159.193.0/24', '162.159.195.0/24', '188.114.96.0/24', '188.114.97.0/24', '188.114.98.0/24', '188.114.99.0/24', '2606:4700:d0::/48', '2606:4700:d1::/48'];
 let ports = [854, 859, 864, 878, 880, 890, 891, 894, 903, 908, 928, 934, 939, 942, 943, 945, 946, 955, 968, 987, 988, 1002, 1010, 1014, 1018, 1070, 1074, 1180, 1387, 1843, 2371, 2506, 3138, 3476, 3581, 3854, 4177, 4198, 4233, 5279, 5956, 7103, 7152, 7156, 7281, 7559, 8319, 8742, 8854, 8886, 2408, 500, 4500, 1701];
 
 // 它们控制生成 SN Link 的数量
@@ -165,46 +169,67 @@ export default {
 		const url = new URL(request.url);
 		let password = env.PASSWORD || ""; // 从cloudflare后台的环境变量中获取密码
 		//———————————————————————————————————————— 从 URL 请求链接中获取需要的参数 ————————————————————————————————————————
-		let target = url.searchParams.get('target') || ""; // 转换为目标客户端或链接类型，v2rayn/wireguard、nekobox/nekoray
+		let target = url.searchParams.get('target') || "wgsn"; // 转换为nekobox的sn://
 		let pwd = url.searchParams.get('pwd') || ""; // 从链接中获取密码
 		let cidrsValue = url.searchParams.get('cidrs') || "";
-		let newcidrs = cidrsValue ? cidrsValue.trim().split(',') : cidrs;
+		let selectedCidrs = cidrsValue ? cidrsValue.trim().split(',') : cidrs;
 		let nodeSize = url.searchParams.get('nodeSize') || randomNodeSize;
 		let ipSize = url.searchParams.get('ipSize') || randomIpSize;
 		let portSize = url.searchParams.get('portSize') || randomPortSize;
-
+		// 选择IPv4 CIDR还是IPv6 CIDR，默认选择IPv4 CIDR
+		let cidrVersion = url.searchParams.get('cidrVersion') || url.searchParams.get('cidrversion') || url.searchParams.get('version') || selectedCIDRVersion;
 		let location = url.searchParams.get('loc') || url.searchParams.get('location') || ""; // 粗略地选择哪些IP段(162/188开头的IP)
-		if (location.toLocaleLowerCase() === "gb" && cidrsValue.trim() === "") {
-			newcidrs = cidrs.filter(item => item.startsWith("188")); // 188开头的cidr
-		} else if (location.toLocaleLowerCase() === "us" && cidrsValue.trim() === "") {
-			newcidrs = cidrs.filter(item => item.startsWith("162")); // 162开头的cidr
-		}
 
 		MTU = url.searchParams.get('mtu') || MTU; // 修改MTU值
 		let mtu = isNaN(Number(MTU)) ? 1280 : Number(MTU);
-		
+
 		// 将除了字母、数字、下划线、连字符和点号之外的所有字符进行编码
 		if (pwd) {
 			password = encodeURIComponent(password);
 			pwd = encodeURIComponent(pwd);
 		}
-		
+
 		// ———————————————————————————— 获取多个 ip_with_port 并添加到 ips_with_ports 数组中 ————————————————————————————
 
 		// 收集IP:PORT
 		let ips_with_ports = [];
-		// 在newcidrs范围内，生成随机一定数量的IP地址
-		generateRandomIPv4InRange(newcidrs, ipSize).forEach(ip => {
-			// 在ports范围内，选择随机一定数量的PORT端口
-			getRandomElementsFromArray(ports, portSize).forEach(port => {
-				ips_with_ports.push(`${ip}:${port}`);
-			});
-		});
+
+		if (cidrVersion == 4) { // 处理是IPv4 CIDR的CIDRs
+			const ipv4CidrArray = selectedCidrs.filter(item => ipv4CidrRegex.test(item));
+			let selectedIPv4Cidrs = [];
+			if (location.toLocaleLowerCase() === "gb" && ipv4CidrArray.length !== 0) {
+				selectedIPv4Cidrs = ipv4CidrArray.filter(item => item.startsWith("188.114")); // 188.114开头的cidr
+			} else if (location.toLocaleLowerCase() === "us" && ipv4CidrArray.length !== 0) {
+				selectedIPv4Cidrs = ipv4CidrArray.filter(item => item.startsWith("162.159")); // 162.159开头的cidr
+			} else {
+				selectedIPv4Cidrs = ipv4CidrArray;
+			}
+			if (selectedIPv4Cidrs.length > 0) {
+				// 在selectedIPv4Cidrs范围内，生成随机一定数量的IP地址
+				generateRandomIPv4InRange(selectedIPv4Cidrs, ipSize).forEach(ip => {
+					// 在ports范围内，选择随机一定数量的PORT端口
+					getRandomElementsFromArray(ports, portSize).forEach(port => {
+						ips_with_ports.push(`${ip}:${port}`);
+					});
+				});
+			}
+		} else if (cidrVersion == 6) { // 处理是IPv6 CIDR的CIDRs
+			const ipv6CidrArray = selectedCidrs.filter(item => ipv6CidrRegex.test(item));
+			if (ipv6CidrArray.length > 0) {
+				// 在ipv6CidrArray范围内，生成随机一定数量的IP地址
+				generateRandomIPv6InRange(ipv6CidrArray, ipSize).forEach(ip => {
+					// 在ports范围内，选择随机一定数量的PORT端口
+					getRandomElementsFromArray(ports, portSize).forEach(port => {
+						ips_with_ports.push(`[${ip}]:${port}`);
+					});
+				});
+			}
+		}
 
 		switch (url.pathname) {
 			case '/sub':
 				// 符合转换目标的才会进行转换
-				if (target.toLocaleLowerCase() === "wgsn" && password === pwd) {
+				if (target.toLocaleLowerCase() === "wgsn" && password === pwd && ips_with_ports.length > 0) {
 					let endpoints = getRandomElementsFromArray(ips_with_ports, nodeSize);
 					let snLinkResult = [];
 					endpoints.forEach(ip_with_port => {
@@ -272,13 +297,13 @@ export default {
 						}
 					});
 				}
-				default:
-					return new Response("Not found", {
-						status: 404,
-						headers: {
-							"Content-Type": "text/plain; charset=utf-8",
-						}
-					});
+			default:
+				return new Response("Not found", {
+					status: 404,
+					headers: {
+						"Content-Type": "text/plain; charset=utf-8",
+					}
+				});
 		}
 	},
 };
@@ -363,6 +388,48 @@ function generateRandomIPv4InRange(cidrs, numOfIPs) {
 			ipInt & 0xff
 		].join('.');
 	});
+}
+
+// 从IPv6 CIDRs范围内，生成随机、不重复的 count个IPv6地址
+function generateRandomIPv6InRange(cidrs, count) {
+	const addresses = new Set();
+	while (addresses.size < count) {
+		// 随机选择一个CIDR
+		const cidr = cidrs[Math.floor(Math.random() * cidrs.length)];
+		const [start, prefixLength] = cidr.split('/');
+		const prefixGroups = Math.floor(prefixLength / 16);
+		const prefixBits = prefixLength % 16;
+		const startParts = start.split(':').slice(0, prefixGroups);
+		if (prefixBits !== 0 && prefixGroups < 8) {
+			const prefixPart = parseInt(start.split(':')[prefixGroups], 16);
+			const prefixMax = prefixPart | ((1 << (16 - prefixBits)) - 1);
+			startParts.push((prefixPart + Math.floor(Math.random() * (prefixMax - prefixPart + 1))).toString(16));
+		}
+		// 补全前缀部分
+		while (startParts.length < 8) {
+			startParts.push('0');
+		}
+		const randomParts = startParts.slice();
+		// 根据前缀大小确定生成的随机段数
+		const remainingGroups = 8 - prefixGroups;
+		let randomGroups = Math.min(remainingGroups, 4); // 最多生成后4段随机
+		if (remainingGroups <= 4) {
+			// 若剩余段数小于等于4，则生成整个 CIDR 范围内的地址段
+			randomGroups = remainingGroups;
+		}
+		// 生成随机部分
+		for (let i = 8 - randomGroups; i < 8; i++) {
+			randomParts[i] = Math.floor(Math.random() * 0x10000).toString(16);
+		}
+		// 连接成地址字符串
+		let address = randomParts.join(':');
+		// 压缩零段
+		address = address.replace(/(^|:)(0:)+/g, '::');
+		if (!addresses.has(address)) {
+			addresses.add(address);
+		}
+	}
+	return Array.from(addresses);
 }
 
 // 从数组中随机选择n个的元素

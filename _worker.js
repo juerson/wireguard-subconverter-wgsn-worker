@@ -4208,7 +4208,10 @@ var Address = ["172.16.0.2/32", "2606:4700:110:816b:ef6f:4f25:f7ab:dc09/128"];
 var PublicKey = "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=";
 var Reserved = "gUxW";
 var MTU = 1280;
-var cidrs = ["162.159.192.0/24", "162.159.193.0/24", "162.159.195.0/24", "188.114.96.0/24", "188.114.97.0/24", "188.114.98.0/24", "188.114.99.0/24"];
+var ipv4CidrRegex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])\/(3[0-2]|[1-2]?[0-9])$/;
+var ipv6CidrRegex = /^((?:[0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,7}:|(?:[0-9A-Fa-f]{1,4}:){1,6}:[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}|(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}|(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}|(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}|[0-9A-Fa-f]{1,4}:(?:(?::[0-9A-Fa-f]{1,4}){1,6})|:(?:(?::[0-9A-Fa-f]{1,4}){1,7}|:)|fe80:(?::[0-9A-Fa-f]{0,4}){0,4}%[0-9A-Za-z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:[0-9A-Fa-f]{1,4}:){1,4}[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,4}:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])(?:\.(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])){3})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
+var selectedCIDRVersion = 4;
+var cidrs = ["162.159.192.0/24", "162.159.193.0/24", "162.159.195.0/24", "188.114.96.0/24", "188.114.97.0/24", "188.114.98.0/24", "188.114.99.0/24", "2606:4700:d0::/48", "2606:4700:d1::/48"];
 var ports = [854, 859, 864, 878, 880, 890, 891, 894, 903, 908, 928, 934, 939, 942, 943, 945, 946, 955, 968, 987, 988, 1002, 1010, 1014, 1018, 1070, 1074, 1180, 1387, 1843, 2371, 2506, 3138, 3476, 3581, 3854, 4177, 4198, 4233, 5279, 5956, 7103, 7152, 7156, 7281, 7559, 8319, 8742, 8854, 8886, 2408, 500, 4500, 1701];
 var randomIpSize = 1e3;
 var randomPortSize = 10;
@@ -4315,19 +4318,15 @@ var worker_default = {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     let password = env.PASSWORD || "";
-    let target = url.searchParams.get("target") || "";
+    let target = url.searchParams.get("target") || "wgsn";
     let pwd = url.searchParams.get("pwd") || "";
     let cidrsValue = url.searchParams.get("cidrs") || "";
-    let newcidrs = cidrsValue ? cidrsValue.trim().split(",") : cidrs;
+    let selectedCidrs = cidrsValue ? cidrsValue.trim().split(",") : cidrs;
     let nodeSize = url.searchParams.get("nodeSize") || randomNodeSize;
     let ipSize = url.searchParams.get("ipSize") || randomIpSize;
     let portSize = url.searchParams.get("portSize") || randomPortSize;
+    let cidrVersion = url.searchParams.get("cidrVersion") || url.searchParams.get("cidrversion") || url.searchParams.get("version") || selectedCIDRVersion;
     let location = url.searchParams.get("loc") || url.searchParams.get("location") || "";
-    if (location.toLocaleLowerCase() === "gb" && cidrsValue.trim() === "") {
-      newcidrs = cidrs.filter((item) => item.startsWith("188"));
-    } else if (location.toLocaleLowerCase() === "us" && cidrsValue.trim() === "") {
-      newcidrs = cidrs.filter((item) => item.startsWith("162"));
-    }
     MTU = url.searchParams.get("mtu") || MTU;
     let mtu = isNaN(Number(MTU)) ? 1280 : Number(MTU);
     if (pwd) {
@@ -4335,14 +4334,36 @@ var worker_default = {
       pwd = encodeURIComponent(pwd);
     }
     let ips_with_ports = [];
-    generateRandomIPv4InRange(newcidrs, ipSize).forEach((ip) => {
-      getRandomElementsFromArray(ports, portSize).forEach((port) => {
-        ips_with_ports.push(`${ip}:${port}`);
-      });
-    });
+    if (cidrVersion == 4) {
+      const ipv4CidrArray = selectedCidrs.filter((item) => ipv4CidrRegex.test(item));
+      let selectedIPv4Cidrs = [];
+      if (location.toLocaleLowerCase() === "gb" && ipv4CidrArray.length !== 0) {
+        selectedIPv4Cidrs = ipv4CidrArray.filter((item) => item.startsWith("188.114"));
+      } else if (location.toLocaleLowerCase() === "us" && ipv4CidrArray.length !== 0) {
+        selectedIPv4Cidrs = ipv4CidrArray.filter((item) => item.startsWith("162.159"));
+      } else {
+        selectedIPv4Cidrs = ipv4CidrArray;
+      }
+      if (selectedIPv4Cidrs.length > 0) {
+        generateRandomIPv4InRange(selectedIPv4Cidrs, ipSize).forEach((ip) => {
+          getRandomElementsFromArray(ports, portSize).forEach((port) => {
+            ips_with_ports.push(`${ip}:${port}`);
+          });
+        });
+      }
+    } else if (cidrVersion == 6) {
+      const ipv6CidrArray = selectedCidrs.filter((item) => ipv6CidrRegex.test(item));
+      if (ipv6CidrArray.length > 0) {
+        generateRandomIPv6InRange(ipv6CidrArray, ipSize).forEach((ip) => {
+          getRandomElementsFromArray(ports, portSize).forEach((port) => {
+            ips_with_ports.push(`[${ip}]:${port}`);
+          });
+        });
+      }
+    }
     switch (url.pathname) {
       case "/sub":
-        if (target.toLocaleLowerCase() === "wgsn" && password === pwd) {
+        if (target.toLocaleLowerCase() === "wgsn" && password === pwd && ips_with_ports.length > 0) {
           let endpoints = getRandomElementsFromArray(ips_with_ports, nodeSize);
           let snLinkResult = [];
           endpoints.forEach((ip_with_port) => {
@@ -4468,6 +4489,39 @@ function generateRandomIPv4InRange(cidrs2, numOfIPs) {
       ipInt & 255
     ].join(".");
   });
+}
+function generateRandomIPv6InRange(cidrs2, count) {
+  const addresses = /* @__PURE__ */ new Set();
+  while (addresses.size < count) {
+    const cidr = cidrs2[Math.floor(Math.random() * cidrs2.length)];
+    const [start, prefixLength] = cidr.split("/");
+    const prefixGroups = Math.floor(prefixLength / 16);
+    const prefixBits = prefixLength % 16;
+    const startParts = start.split(":").slice(0, prefixGroups);
+    if (prefixBits !== 0 && prefixGroups < 8) {
+      const prefixPart = parseInt(start.split(":")[prefixGroups], 16);
+      const prefixMax = prefixPart | (1 << 16 - prefixBits) - 1;
+      startParts.push((prefixPart + Math.floor(Math.random() * (prefixMax - prefixPart + 1))).toString(16));
+    }
+    while (startParts.length < 8) {
+      startParts.push("0");
+    }
+    const randomParts = startParts.slice();
+    const remainingGroups = 8 - prefixGroups;
+    let randomGroups = Math.min(remainingGroups, 4);
+    if (remainingGroups <= 4) {
+      randomGroups = remainingGroups;
+    }
+    for (let i = 8 - randomGroups; i < 8; i++) {
+      randomParts[i] = Math.floor(Math.random() * 65536).toString(16);
+    }
+    let address = randomParts.join(":");
+    address = address.replace(/(^|:)(0:)+/g, "::");
+    if (!addresses.has(address)) {
+      addresses.add(address);
+    }
+  }
+  return Array.from(addresses);
 }
 function getRandomElementsFromArray(arr, n = 10) {
   if (n < 1 || n > arr.length) {

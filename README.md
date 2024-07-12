@@ -40,16 +40,17 @@ https://a.abc.workers.dev/sub?target=wgsn&pwd=<这里添加你设置的变量密
 
 ### 三、参数说明
 
-| 参数         | 含义                                                         | 例子                                                         |
-| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| target       | （必须）转换成的目标，这个代码只能转换为Nekobox for Android 的 `sn://` 。 | target=wgsn，wireguard => wg+sn => wgsn<br>特指 Nekobox for Android 中 wireguard 代理协议的 sn 分享链接 |
-| pwd          | （必须/可选）访问订阅内容的密码<br>如果您在 cloudflare 中设置了`PASSWORD` 变量值(访问密码)，这个参数是必须的。 | pwd=???<br>密码等于您在 cloudflare 后台设置的`PASSWORD` 变量值 |
-| nodeSize     | （可选）您需要多少条sn://链接?                               | nodeSize=100，100条 `SN Link` 链接，默认为200                |
-| loc/location | （可选）你想要哪个 cidr 段的IP？<br>us => 162.159开头的IP；gb => 188.114开头的IP。 | loc=us、loc=gb                                               |
-| mtu          | （可选）修改 WirGuard 中的 mtu 的值。                        | mtu=1280，或者 `1280~1500` 之间的数，默认1280                |
-| ipSize       | （可选）从所有 cidrs 中随机生成多少个不重复的IP，一定程度上可以控制 SN Link 生成的数量。 | ipSize=500，生成500个IP地址，默认为1000                      |
-| portSize     | （可选）从 ports 的54个端口中随机生成多少个不重复的 port ，一定程度上可以控制 SN Link 生成的数量。 | portSize=5，随机选择54个port的5个，默认为10                  |
-| cidrs        | （可选）使用自定义的 cidr ，不使用内置的 cidrs ，支持多个 cidr 以逗号隔开、字符串形式传入。只支持 IPv4 CIDR 的传入。 | cidrs=162.159.192.0/24<br>cidrs=162.159.192.0/24,162.159.193.0/24 |
+| 参数                | 含义                                                         | 例子                                                         |
+| ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| target              | （必须）转换成的目标，这个代码只能转换为Nekobox for Android 的 `sn://` 。 | target=wgsn，wireguard => wg+sn => wgsn<br>特指 Nekobox for Android 中 wireguard 代理协议的 sn 分享链接 |
+| pwd                 | （必须/可选）访问订阅内容的密码<br>如果您在 cloudflare 中设置了`PASSWORD` 变量值(访问密码)，这个参数是必须的。 | pwd=???<br>密码等于您在 cloudflare 后台设置的`PASSWORD` 变量值 |
+| nodeSize            | （可选）您需要多少条sn://链接?                               | nodeSize=100，100条 `SN Link` 链接，默认为200                |
+| loc/location        | （可选）你想要哪个 cidr 段的IP？<br>us => 162.159开头的IP；gb => 188.114开头的IP。 | loc=us、loc=gb                                               |
+| mtu                 | （可选）修改 WirGuard 中的 mtu 的值。                        | mtu=1280，或者 `1280~1500` 之间的数，默认1280                |
+| ipSize              | （可选）从所有 cidrs 中随机生成多少个不重复的IP，一定程度上可以控制 SN Link 生成的数量。 | ipSize=500，生成500个IP地址，默认为1000                      |
+| portSize            | （可选）从 ports 的54个端口中随机生成多少个不重复的 port ，一定程度上可以控制 SN Link 生成的数量。 | portSize=5，随机选择54个port的5个，默认为10                  |
+| cidrs               | （可选）使用自定义的 cidr ，不使用内置的 cidrs ，支持多个 cidr 以逗号隔开、字符串形式传入。只支持 IPv4 CIDR 的传入。 | cidrs=162.159.192.0/24<br>cidrs=162.159.192.0/24,162.159.193.0/24 |
+| version/cidrversion | （可选）选择IPv4 CIDR生成IP呢？还是IPv6 CIDR生成IP呢？       | version=4，IPv4 CIDR，也就是使用IPv4地址<br>version=6，IPv4 CIDR，也就是使用IPv6地址 |
 
 
 ```
@@ -61,6 +62,8 @@ ttps://a.abc.workers.dev/sub?target=wgsn&nodeSize=100
 ttps://a.abc.workers.dev/sub?target=wgsn&nodeSize=100&mtu=1280
 https://a.abc.workers.dev/sub?target=wgsn&ipSize=200&portSize=10
 https://a.abc.workers.dev/sub?target=wgsn&ipSize=200&portSize=10&cidrs=162.159.192.0/24,162.159.193.0/24
+https://a.abc.workers.dev/sub?target=wgsn&version=4
+https://a.abc.workers.dev/sub?target=wgsn&version=6
 ```
 
 ### 四、工具
